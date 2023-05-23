@@ -55,25 +55,6 @@ gitProperties {
     failOnNoGitDirectory = false
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "opencollab"
-            url = uri("https://repo.opencollab.dev/maven-snapshots")
-            credentials {
-                username = System.getenv("DEPLOY_USERNAME")
-                password = System.getenv("DEPLOY_PASSWORD")
-            }
-        }
-    }
-
-    publications {
-        create<MavenPublication>("nukkit") {
-            from(components["java"])
-        }
-    }
-}
-
 tasks {
     compileJava {
         options.encoding = "UTF-8"
