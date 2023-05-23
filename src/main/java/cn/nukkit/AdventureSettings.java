@@ -55,15 +55,15 @@ public class AdventureSettings implements Cloneable {
         packet.setPlayerPermission(player.isOp() && !player.isSpectator() ? UpdateAbilitiesPacket.PlayerPermission.OPERATOR : UpdateAbilitiesPacket.PlayerPermission.MEMBER);
 
         AbilityLayer layer = new AbilityLayer();
-        AbilityLayer layerSpectator = new AbilityLayer();
-
-        if (player.isSpectator()) {
-            layerSpectator.setLayerType(AbilityLayer.Type.SPECTATOR);
-            layerSpectator.getAbilityValues().add(PlayerAbility.FLYING);
-            layerSpectator.getAbilityValues().add(PlayerAbility.NO_CLIP);
-        }
 
         layer.setLayerType(AbilityLayer.Type.BASE);
+
+        if (player.isSpectator()) {
+            layer.setLayerType(AbilityLayer.Type.SPECTATOR);
+            layer.getAbilityValues().add(PlayerAbility.FLYING);
+            layer.getAbilityValues().add(PlayerAbility.NO_CLIP);
+        }
+
         layer.getAbilitiesSet().addAll(PlayerAbility.VALUES);
 
         for (Type type : Type.values()) {
@@ -87,7 +87,6 @@ public class AdventureSettings implements Cloneable {
         layer.setWalkSpeed(Player.DEFAULT_SPEED);
         layer.setFlySpeed(Player.DEFAULT_FLY_SPEED);
         packet.getAbilityLayers().add(layer);
-        packet.getAbilityLayers().add(layerSpectator);
 
         UpdateAdventureSettingsPacket adventurePacket = new UpdateAdventureSettingsPacket();
         adventurePacket.setAutoJump(get(Type.AUTO_JUMP));
