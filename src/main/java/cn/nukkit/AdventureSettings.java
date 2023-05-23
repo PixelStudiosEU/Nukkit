@@ -60,6 +60,7 @@ public class AdventureSettings implements Cloneable {
         if (player.isSpectator()) {
             layerSpectator.setLayerType(AbilityLayer.Type.SPECTATOR);
             layerSpectator.getAbilityValues().add(PlayerAbility.FLYING);
+            layerSpectator.getAbilityValues().add(PlayerAbility.NO_CLIP);
         }
 
         layer.setLayerType(AbilityLayer.Type.BASE);
