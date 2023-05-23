@@ -57,12 +57,6 @@ public class AdventureSettings implements Cloneable {
 
         layer.setLayerType(AbilityLayer.Type.BASE);
 
-        if (player.isSpectator()) {
-            layer.setLayerType(AbilityLayer.Type.SPECTATOR);
-            layer.getAbilityValues().add(PlayerAbility.FLYING);
-            layer.getAbilityValues().add(PlayerAbility.NO_CLIP);
-        }
-
         layer.getAbilitiesSet().addAll(PlayerAbility.VALUES);
 
         for (Type type : Type.values()) {
@@ -99,6 +93,14 @@ public class AdventureSettings implements Cloneable {
         adventurePacket.setShowNameTags(get(Type.SHOW_NAME_TAGS));
 
         player.dataPacket(packet);
+
+        if (player.isSpectator()) {
+            layer.setLayerType(AbilityLayer.Type.SPECTATOR);
+            layer.getAbilityValues().add(PlayerAbility.FLYING);
+            layer.getAbilityValues().add(PlayerAbility.NO_CLIP);
+            player.dataPacket(packet);
+        }
+
         player.dataPacket(adventurePacket);
         player.resetInAirTicks();
     }
